@@ -1,0 +1,41 @@
+function [xK, Pc, xK_pre, Pc_pre, kal, NIS, z_rsd, C] = extended_km(var_r,var_q, z,
+N,T)
+%This function implements extended Kalman filter
+%For the right parameters:
+% var_r is the variance of measurement noise, which is 1 for z1 and 100 for z2
+% var_q is the variance of process noise, which is 1 always
+% z represents the measurement, which can be z1 or z2 % N is the points'number,namely
+1507 %T is time interval, namely 0.5s
+%For the left parameters:
+% xK stores kalman esitimates, namely the estimates of [px, vx, py, vy]' % Pc stores
+covariance matrix of kalman estimates
+% xK_pre stores prior estimates x_ for the system, %Pc_pre stores covariance matrix of
+the prior estimates
+% kal stores Kalman gain matrix for iteration
+% NIS stores NIS values, equaling (z_rsd)'*inv(S)*z_rsd, z_rsd and S defined later
+% C is the Jacobian matrix Ck
+A = [1 T 0 0; 0 1 0 0; 0 0 1 T; 0 0 0 1]; % Transition matrix
+%Needed R and Rf:
+R=[var_r 0; 0 var_r*(1e-06)]; %for z1, R=[1 0; 0 1*10^(-6)],for z2, R=[100 0; 0
+100*10^(-6)]
+Rf=R;
+%Qf needed in Kalman filter:
+Q=var_q*[(T^3)/3 (T^2)/2 0 0; (T^2)/2 T 0 0; 0 0 (T^3)/3 (T^2)/2; 0 0
+(T^2)/2 T];
+Qf=Q;
+%Initialize kalman esitimates xK, and its covariance matrix Pc
+xK=zeros(4,N);
+Pc=zeros(4,4,N);
+
+%Give initial state to above xK,Pc
+xK(:,1)=[500; 60; 200; 42]; % initial [px, vx, py, vy]
+P0 = inv([R(1,1) R(1,1)/T 0 0; R(1,1)/T 2*R(1,1)/(T^2) 0 0; 0 0 R(2,2)
+R(2,2)/T; 0 0 R(2,2)/T 2*R(2,2)/(T^2)]); %P0
+Pc(:,:,1)=P0; %P0 assigned to initial value of Pc
+%Initialize prior estimated states and its covariance matrix
+xK_pre=zeros(4,N);
+Pc_pre=zeros(4,4,N);
+%jacobian matrix Ck:
+C=zeros(2,4,N);
+%initialize h:
+h=zeros(2,N);
