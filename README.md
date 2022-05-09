@@ -30,9 +30,10 @@ Just give a short description:
                                              𝐾(𝑘)=𝑃−(𝑘)𝐶𝑘𝑇[𝐶𝑘𝑃−(𝑘)𝐶𝑘𝑇+𝑅𝑓(𝑘)]−1       (5)
                                              𝑥̂(𝑘)=𝑥̂−(𝑘)+𝐾(𝑘)[𝑧(𝑘)−ℎ(𝑥̂−(𝑘),0)]          (6)
                                              𝑃(𝑘)=[𝐼−𝐾(𝑘)𝐶𝑘]𝑃−(𝑘)                      (7)
-  𝐼 is the identity matrix, ℎ isthe function in (2), 𝑅𝑓(𝑘) is the measurement noise covariance at step 𝑘. The Jacobian 𝐶𝑘 at time step 𝑘 is given by:
-                                            𝐶𝑘[𝑖,𝑗] = 𝜕ℎ[𝑖]𝜕𝑥[𝑗](𝑥̂−(𝑘),𝑢(𝑘−1))
-  Thus, 𝐶 is the Jacobian matrix of partial derivatives of ℎ with respect to the state 𝑥.
+                            𝐼 is the identity matrix, ℎ isthe function in (2), 𝑅𝑓(𝑘) is the measurement noise covariance at step 𝑘. The Jacobian 𝐶𝑘 at time step 𝑘 is given by:
+                                           
+                                           𝐶𝑘[𝑖,𝑗] = 𝜕ℎ[𝑖]𝜕𝑥[𝑗](𝑥̂−(𝑘),𝑢(𝑘−1))
+                            Thus, 𝐶 is the Jacobian matrix of partial derivatives of ℎ with respect to the state 𝑥.
   
    Implement and apply the Extended Kalman Filter to the two given measurements in 'RadarMeasurements.mat'. Set 𝜎q2=1. Use 𝜎r2=1 to analyse the first measurement and 𝜎r2=100 to analyse the second measurement. See  the code (未完成)
    
