@@ -35,7 +35,7 @@ Just give a short description:
                                            𝐶𝑘[𝑖,𝑗] = 𝜕ℎ[𝑖]𝜕𝑥[𝑗](𝑥̂−(𝑘),𝑢(𝑘−1))
                             Thus, 𝐶 is the Jacobian matrix of partial derivatives of ℎ with respect to the state 𝑥.
   
-   Implement and apply the Extended Kalman Filter to the two given measurements in 'RadarMeasurements.mat'. Set 𝜎q2=1. Use 𝜎r2=1 to analyse the first measurement and 𝜎r2=100 to analyse the second measurement. See  the code (未完成)
+   Implement and apply the Extended Kalman Filter to the two given measurements in 'RadarMeasurements.mat'. Set 𝜎q2=1. Use 𝜎r2=1 to analyse the first measurement and 𝜎r2=100 to analyse the second measurement. See  the code extended_km.mlx
    
    Here I also attach the figure of motion track of the object, and the figure of Kalman gains obtained, and the figure of NIS plotting. 
    
